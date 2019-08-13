@@ -9,16 +9,23 @@
 import UIKit
 
 class ArticleInfoCell: UITableViewCell {
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var dateInfoLabel: UILabel!
+    @IBOutlet weak var authorsLabel: UILabel!
 
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
     }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+    
+    func setup() {
+        
+    }
+    
+    func configure(_ article: ArticleDetails) {
+        titleLabel.text = article.title
+        dateInfoLabel.text = "dernière modification le \(article.modificationDate), publié le \(article.publicationDate)"
+        authorsLabel.text = "article par \(article.authors)"
     }
     
 }

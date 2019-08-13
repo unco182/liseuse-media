@@ -9,16 +9,28 @@
 import UIKit
 
 class MediaCell: UITableViewCell {
-
+    @IBOutlet weak var pictureImageView: UIImageView!
+    @IBOutlet weak var creditsLabel: UILabel!
+    @IBOutlet weak var captionLabel: UILabel!
+    
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        setup()
+        
+    }
+    
+    func setup() {
+        self.layer.cornerRadius = 8
     }
 
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
+    
+    func configure(_ article: ArticleDetails) {
+//        setup()
+//        pictureImageView
 
-        // Configure the view for the selected state
     }
+    
     
 }

@@ -11,14 +11,29 @@ import Foundation
 
 protocol HomeProtocol {
     func isLoading(_ bool: Bool)
+    func showArticleDetails()
 }
 
 class HomeViewModel {
     var homeView: HomeProtocol?
     
-    func fetchArticles() -> [Article] {
+    var selectedArticle: Article?
+    
+    var articles: [Article] = []
+    
+    init(view: HomeProtocol) {
+        homeView = view
+        fetchArticles()
+    }
+    
+    func fetchArticles() {
         self.homeView?.isLoading(true)
-        
-        return []
+        articles = S.sp.articleManager.fetchArticles()
+        self.homeView?.isLoading(false)
+    }
+    
+    func setSelectedArticle(_ index: Int) {
+        selectedArticle = articles[index]
+        homeView?.showArticleDetails()
     }
 }

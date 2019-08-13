@@ -15,6 +15,20 @@ enum ArticleManagerError: Error {
 }
 
 class ArticleManager: NSObject {
+    func fetchArticles() -> [Article] {
+        var articles: [Article] = []
+        if let path = Bundle.main.path(forResource: "articles", ofType: "json") {
+            do {
+                let data = try Data(contentsOf: URL(fileURLWithPath: path), options: .mappedIfSafe)
+                let decoder = JSONDecoder()
+                articles = try decoder.decode([Article].self, from: data)
+                
+            } catch {
+                print(error.localizedDescription)
+            }
+        }
+        return articles
+    }
 //    func fetchPlaceDetails(placeId: String) -> Single<GoogleCoffeeDetails> {
 //        let l = Locale.current
 //        return GooglePlacesManager.fetchPlaceDetails(parameters: ["key": apiKey, "language": l.languageCode, "placeid" : "\(placeId)"])

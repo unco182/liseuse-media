@@ -4,34 +4,22 @@
 
 import UIKit
 
-class MainViewController: UITableViewController {
-
-    private var articles = [Article]()
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        if let path = Bundle.main.path(forResource: "articles", ofType: "json") {
-            do {
-                let data = try Data(contentsOf: URL(fileURLWithPath: path), options: .mappedIfSafe)
-                let decoder = JSONDecoder()
-                articles = try decoder.decode([Article].self, from: data)
-            } catch {
-                print(error.localizedDescription)
-            }
-            tableView.reloadData()
+class HomeViewController: UITableViewController {
+    var viewModel: HomeViewModel?
+    
+    var isLoading = true {
+        didSet {
+            updateUI()
         }
     }
 
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return articles.count
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        viewModel = HomeViewModel(view: self)
     }
 
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "ArticleCell", for: indexPath)
-        let item = articles[indexPath.row]
-        cell.textLabel?.text = "[\(item.channelName)] \(item.title)"
-        cell.detailTextLabel?.text = item.publicationDate
-        return cell
+    func updateUI() {
+        self.tableView.reloadData()
     }
     
     // MARK - Navigation
@@ -40,10 +28,44 @@ class MainViewController: UITableViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let destination = segue.destination as! DetailsViewController
-        //        destination.viewModel = DetailsViewModel(id: viewModel.selectedId)
+        destination.viewModel = DetailsViewModel(id: ""/*viewModel.selectedId*/, view: destination)
         navigationController?.pushViewController(destination, animated: true)
         
     }
+
     
+}
+
+extension HomeViewController: HomeProtocol {
+    func isLoading(_ bool: Bool) {
+        self.isLoading = bool
+    }
+}
+
+extension HomeViewController {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if isLoading {
+            tableView.setLoader()
+        }
+        else {
+            tableView.restore()
+        }
+        return self.viewModel?.articles.count ?? 0
+    }
+    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "ArticleCell", for: indexPath)
+        let item = viewModel?.articles[indexPath.row]
+        guard let article = item else {
+           return UITableViewCell()
+        }
+        cell.textLabel?.text = "[\(article.channelName)] \(article.title)"
+        cell.detailTextLabel?.text = article.publicationDate
+        return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        viewModel.setSelectedArticle(indexPath.row)
+    }
 }
 

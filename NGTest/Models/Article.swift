@@ -11,7 +11,7 @@ struct Article: Codable {
     let channelName: String
     let title: String
     let lead: String
-    let visual: String // urlPattern
+    let visual: [Visual] // urlPattern
     let publicationDate: String
     let modificationDate: String
     let dataUrl: String //

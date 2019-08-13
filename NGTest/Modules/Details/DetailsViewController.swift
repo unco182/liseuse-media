@@ -9,10 +9,19 @@
 import UIKit
 
 class DetailsViewController: UITableViewController {
+    var viewModel: DetailsViewModel!
+    
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+    }
+}
+
+extension DetailsViewController: DetailsProtocol {
+    func isLoading(_ bool: Bool) {
+        
     }
 }

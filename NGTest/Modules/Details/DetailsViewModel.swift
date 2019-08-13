@@ -8,16 +8,41 @@
 
 import Foundation
 
+enum DetailsUICell {
+    case media(article: ArticleDetails)
+    case info(article: ArticleDetails)
+    case content(article: ArticleDetails)
+}
+
 protocol DetailsProtocol {
     func isLoading(_ bool: Bool)
 }
 
 class DetailsViewModel {
-    var detailsView: DetailsProtocol?
+    var id: String
+    var article: ArticleDetails?
+    var detailsView: DetailsProtocol
+    
+    var datasource: [DetailsUICell] = []
+    
+    init(id: String, view: DetailsProtocol) {
+        self.id = id
+        self.detailsView = view
+        self.article = fetchArticle()
+    }
     
     func fetchArticle() -> ArticleDetails {
-        self.detailsView?.isLoading(true)
-        
+
         return ArticleDetails(id: "", channelName: "", title: "", lead: "", visual: "", publicationDate: "", modificationDate: "", dataUrl: "", location: "", lienURL: "", showDate: true, relatedArticles: [], caption: "", credits: "", urlPattern: "", mobileChapters: [], authors: "")
+    }
+    
+    func buildDatasource() {
+        self.detailsView.isLoading(true)
+        let article = fetchArticle()
+        datasource = [.media(article: article),
+                      .info(article: article),
+                      .content(article: article)]
+        self.detailsView.isLoading(false)
+        
     }
 }

@@ -7,7 +7,7 @@
 //
 
 import XCTest
-@testable import NGTest
+//@testable import NGTest
 
 class NGTestTests: XCTestCase {
 

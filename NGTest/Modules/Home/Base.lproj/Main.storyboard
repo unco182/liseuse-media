@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -51,10 +52,28 @@
                     <navigationItem key="navigationItem" title="Nuglif Test" id="RMb-WT-uN2">
                         <barButtonItem key="rightBarButtonItem" title="Trier" id="N9K-QG-9ph"/>
                     </navigationItem>
+                    <connections>
+                        <segue destination="i1x-D0-X4x" kind="show" identifier="toDetails" id="Oh6-Xj-PPB"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="e9i-FL-ILO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-755.07246376811599" y="25.446428571428569"/>
+        </scene>
+        <!--Details View Controller-->
+        <scene sceneID="hCs-Rx-ccN">
+            <objects>
+                <viewController id="i1x-D0-X4x" customClass="DetailsViewController" customModule="NGTest" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="fgx-ph-fFI">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="H90-hS-Fe9"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qeH-4L-zFW" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="249" y="34"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="yKC-8l-m3h">

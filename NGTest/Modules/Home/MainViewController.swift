@@ -33,5 +33,17 @@ class MainViewController: UITableViewController {
         cell.detailTextLabel?.text = item.publicationDate
         return cell
     }
+    
+    // MARK - Navigation
+    // Pour les besoins du test, j'ai choisi d'utiliser les segue, cependant ce n'est pas forcement la meilleure pratique car cela donne une responsabilité au ViewController
+    // qui devrait être dépourvu de logique. Dans le cadre d'un projet de grande envergure on aurait pu implémenter un Navigator ou un Coordinator.
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let destination = segue.destination as! DetailsViewController
+        //        destination.viewModel = DetailsViewModel(id: viewModel.selectedId)
+        navigationController?.pushViewController(destination, animated: true)
+        
+    }
+    
 }
 

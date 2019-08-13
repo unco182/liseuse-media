@@ -8,7 +8,7 @@
 
 import UIKit
 
-class DetailsViewController: UIViewController {
+class DetailsViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()

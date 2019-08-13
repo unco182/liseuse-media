@@ -14,6 +14,12 @@
 		712801692301FDF700929027 /* DetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 712801682301FDF700929027 /* DetailsViewModel.swift */; };
 		7128016B23020E1B00929027 /* ArticleDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7128016A23020E1B00929027 /* ArticleDetails.swift */; };
 		7128016D230211C100929027 /* RelatedArticle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7128016C230211C100929027 /* RelatedArticle.swift */; };
+		7128017123023E1900929027 /* MediaCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7128016F23023E1900929027 /* MediaCell.swift */; };
+		7128017223023E1900929027 /* MediaCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7128017023023E1900929027 /* MediaCell.xib */; };
+		7128017523023E8300929027 /* ArticleInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7128017323023E8300929027 /* ArticleInfoCell.swift */; };
+		7128017623023E8300929027 /* ArticleInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7128017423023E8300929027 /* ArticleInfoCell.xib */; };
+		7128017923023EA500929027 /* ArticleContentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7128017723023EA500929027 /* ArticleContentCell.swift */; };
+		7128017A23023EA500929027 /* ArticleContentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7128017823023EA500929027 /* ArticleContentCell.xib */; };
 		974FC79C227BB11B00C94130 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 974FC79B227BB11B00C94130 /* AppDelegate.swift */; };
 		974FC79E227BB11B00C94130 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 974FC79D227BB11B00C94130 /* MainViewController.swift */; };
 		974FC7A1227BB11B00C94130 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 974FC79F227BB11B00C94130 /* Main.storyboard */; };
@@ -42,6 +48,12 @@
 		712801682301FDF700929027 /* DetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewModel.swift; sourceTree = "<group>"; };
 		7128016A23020E1B00929027 /* ArticleDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleDetails.swift; sourceTree = "<group>"; };
 		7128016C230211C100929027 /* RelatedArticle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RelatedArticle.swift; sourceTree = "<group>"; };
+		7128016F23023E1900929027 /* MediaCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaCell.swift; sourceTree = "<group>"; };
+		7128017023023E1900929027 /* MediaCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MediaCell.xib; sourceTree = "<group>"; };
+		7128017323023E8300929027 /* ArticleInfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleInfoCell.swift; sourceTree = "<group>"; };
+		7128017423023E8300929027 /* ArticleInfoCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ArticleInfoCell.xib; sourceTree = "<group>"; };
+		7128017723023EA500929027 /* ArticleContentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleContentCell.swift; sourceTree = "<group>"; };
+		7128017823023EA500929027 /* ArticleContentCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ArticleContentCell.xib; sourceTree = "<group>"; };
 		974FC798227BB11B00C94130 /* NGTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NGTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		974FC79B227BB11B00C94130 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		974FC79D227BB11B00C94130 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -78,6 +90,7 @@
 		712801592301F98900929027 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				7128016E23023DE600929027 /* Cells */,
 				7128015B2301F99F00929027 /* Details */,
 				7128015A2301F99900929027 /* Home */,
 			);
@@ -120,6 +133,19 @@
 				712801602301FB0D00929027 /* ArticleManager.swift */,
 			);
 			path = ServiceProvider;
+			sourceTree = "<group>";
+		};
+		7128016E23023DE600929027 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				7128016F23023E1900929027 /* MediaCell.swift */,
+				7128017023023E1900929027 /* MediaCell.xib */,
+				7128017323023E8300929027 /* ArticleInfoCell.swift */,
+				7128017423023E8300929027 /* ArticleInfoCell.xib */,
+				7128017723023EA500929027 /* ArticleContentCell.swift */,
+				7128017823023EA500929027 /* ArticleContentCell.xib */,
+			);
+			path = Cells;
 			sourceTree = "<group>";
 		};
 		974FC78F227BB11B00C94130 = {
@@ -254,10 +280,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7128017623023E8300929027 /* ArticleInfoCell.xib in Resources */,
 				974FC7BD227BB1F400C94130 /* articles.json in Resources */,
 				974FC7A6227BB11C00C94130 /* LaunchScreen.storyboard in Resources */,
+				7128017223023E1900929027 /* MediaCell.xib in Resources */,
 				974FC7A3227BB11C00C94130 /* Assets.xcassets in Resources */,
 				974FC7A1227BB11B00C94130 /* Main.storyboard in Resources */,
+				7128017A23023EA500929027 /* ArticleContentCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -275,12 +304,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7128017523023E8300929027 /* ArticleInfoCell.swift in Sources */,
 				7128015F2301FA2600929027 /* ServiceProvider.swift in Sources */,
 				974FC79E227BB11B00C94130 /* MainViewController.swift in Sources */,
 				7128016D230211C100929027 /* RelatedArticle.swift in Sources */,
+				7128017923023EA500929027 /* ArticleContentCell.swift in Sources */,
 				712801672301FD2D00929027 /* HomeViewModel.swift in Sources */,
 				712801692301FDF700929027 /* DetailsViewModel.swift in Sources */,
 				712801612301FB0D00929027 /* ArticleManager.swift in Sources */,
+				7128017123023E1900929027 /* MediaCell.swift in Sources */,
 				7128016B23020E1B00929027 /* ArticleDetails.swift in Sources */,
 				974FC79C227BB11B00C94130 /* AppDelegate.swift in Sources */,
 				974FC7BF227BD71400C94130 /* Article.swift in Sources */,

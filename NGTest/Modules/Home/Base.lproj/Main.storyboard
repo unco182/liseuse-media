@@ -6,7 +6,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
-        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -53,7 +52,7 @@
                         <barButtonItem key="rightBarButtonItem" title="Trier" id="N9K-QG-9ph"/>
                     </navigationItem>
                     <connections>
-                        <segue destination="i1x-D0-X4x" kind="show" identifier="toDetails" id="Oh6-Xj-PPB"/>
+                        <segue destination="IOR-7b-g2V" kind="show" identifier="toDetails" id="02t-Ya-AfM"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="e9i-FL-ILO" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -61,19 +60,32 @@
             <point key="canvasLocation" x="-755.07246376811599" y="25.446428571428569"/>
         </scene>
         <!--Details View Controller-->
-        <scene sceneID="hCs-Rx-ccN">
+        <scene sceneID="nQ2-kd-AcX">
             <objects>
-                <viewController id="i1x-D0-X4x" customClass="DetailsViewController" customModule="NGTest" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="fgx-ph-fFI">
+                <tableViewController id="IOR-7b-g2V" customClass="DetailsViewController" customModule="NGTest" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="yt6-uW-hTz">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <viewLayoutGuide key="safeArea" id="H90-hS-Fe9"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="qeH-4L-zFW" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="b4Q-NQ-1gd">
+                                <rect key="frame" x="0.0" y="28" width="414" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="b4Q-NQ-1gd" id="yJ3-Wo-bAw">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="IOR-7b-g2V" id="7qH-oB-4rs"/>
+                            <outlet property="delegate" destination="IOR-7b-g2V" id="gnz-9x-tkn"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="I7t-1i-FrX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="249" y="34"/>
+            <point key="canvasLocation" x="110" y="3"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="yKC-8l-m3h">

@@ -8,24 +8,24 @@
 
 struct ArticleDetails: Codable {
     
-    let id: String
+    let id: Int
     let channelName: String
     let title: String
     let lead: String
-    let visual: String // urlPattern
-    let publicationDate: String
+    let visual: [Visual] // urlPattern
+//    let publicationDate: String
     let modificationDate: String
-    let dataUrl: String //
+    let dataUrl: String? //
     
-    let location: String
+    let location: String?
     let lienURL: String
-    let showDate: Bool
-    let relatedArticles: [String] // RelatedArticle
-    let caption: String
-    let credits: String
-    let urlPattern: String // pictureUrl
-    let mobileChapters: [String] //mobileChapters.index.text
-    let authors: String 
+//    let showDate: Bool?
+//    let relatedArticles: [String]? // RelatedArticle
+    let caption: String?
+    let credits: String?
+    let urlPattern: String? // pictureUrl
+    let mobileChapters: [MobileChapter] //mobileChapters.index.text
+//    let authors: String?
     
     
     // - MARK computed values
@@ -39,20 +39,20 @@ struct ArticleDetails: Codable {
         case id
         case channelName
         case title
-        case publicationDate
+//        case publicationDate
         case lead
         case visual
         case modificationDate
         case dataUrl
-        
+
         case location
         case lienURL
-        case showDate
-        case relatedArticles
+//        case showDate
+//        case relatedArticles
         case caption
         case credits
         case urlPattern
         case mobileChapters
-        case authors
+//        case authors
     }
 }

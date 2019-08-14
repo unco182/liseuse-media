@@ -6,13 +6,15 @@
 //  Copyright © 2019 Nuglif. All rights reserved.
 //
 
-//import Alamofire
+import Alamofire
 import Foundation
-//import RxAlamofire
-//import RxSwift
+import RxAlamofire
+import RxSwift
 
 enum ArticleManagerError: Error {
 }
+
+let networkTimeoutTime: Double = 45
 
 class ArticleManager: NSObject {
     func fetchArticles() -> [Article] {
@@ -29,16 +31,16 @@ class ArticleManager: NSObject {
         }
         return articles
     }
-//    func fetchPlaceDetails(placeId: String) -> Single<GoogleCoffeeDetails> {
-//        let l = Locale.current
-//        return GooglePlacesManager.fetchPlaceDetails(parameters: ["key": apiKey, "language": l.languageCode, "placeid" : "\(placeId)"])
-//    }
-//
-//    private static func fetchPlaceDetails(parameters: [String: Any]? = nil) -> Single<GoogleCoffeeDetails> {
-//        return json(.get, GooglePlacesManager.detailsURL, parameters: parameters,
-//                    encoding: URLEncoding.queryString)
-//            .timeout(AppConstants.networkTimeoutTime, scheduler: MainScheduler.instance)
-//            .mapObject(type: GoogleCoffeeDetails.self)
-//            .asSingle()
-//    }
+    
+    func fetchArticlesDetails(url: String, parameters: [String: Any]? = nil) -> Single<ArticleDetails> {
+        return ArticleManager.fetchArticleDetails(url: url, parameters: parameters)
+    }
+    
+    private static func fetchArticleDetails(url: String, parameters: [String: Any]? = nil) -> Single<ArticleDetails> {
+        return json(.get, url)
+            .timeout(networkTimeoutTime, scheduler: MainScheduler.instance)
+            .mapObject(type: ArticleDetails.self)
+            .asSingle()
+    }
+
 }

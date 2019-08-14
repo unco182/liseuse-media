@@ -68,4 +68,8 @@ extension DetailsViewController: DetailsProtocol {
     func isLoading(_ bool: Bool) {
         self.isLoading = bool
     }
+    
+    func navigationTitle(_ channelName: String) {
+        self.title = channelName
+    }
 }

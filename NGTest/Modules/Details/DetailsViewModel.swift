@@ -19,6 +19,7 @@ enum DetailsUICell {
 
 protocol DetailsProtocol {
     func isLoading(_ bool: Bool)
+    func navigationTitle(_ channelName: String)
 }
 
 class DetailsViewModel {
@@ -49,6 +50,7 @@ class DetailsViewModel {
     func buildDatasource() {
         self.detailsView.isLoading(true)
         if let aDetails = articleDetails {
+            detailsView.navigationTitle(article.channelName)
             datasource = [.media(article: aDetails, pictureUrl: article.visual.first?.urlPattern ?? ""),
                           .info(article: article, author: aDetails.byLine ?? ""),
                           .lead(article: article)]

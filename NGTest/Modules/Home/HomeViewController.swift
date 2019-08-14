@@ -15,6 +15,8 @@ class HomeViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        TableViewCellBuilder.prepareTableView(tableView)
+        tableView.separatorStyle = .none
         viewModel = HomeViewModel(view: self)
     }
 
@@ -58,13 +60,12 @@ extension HomeViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "ArticleCell", for: indexPath)
         let item = viewModel?.articles[indexPath.row]
         guard let article = item else {
            return UITableViewCell()
         }
-        cell.textLabel?.text = "[\(article.channelName)] \(article.title)"
-        cell.detailTextLabel?.text = article.publicationDate
+        let cell = TableViewCellBuilder.articlePreview(tableView, indexPath, article: article)
+
         return cell
     }
     

@@ -13,11 +13,15 @@ final class TableViewCellBuilder {
     private init() {}
     
     static func prepareTableView(_ tableView: UITableView) {
+        // ArticleDetails
         tableView.registerCellNib(cellClass: MediaCell.self)
         tableView.registerCellNib(cellClass: ArticleInfoCell.self)
         tableView.registerCellNib(cellClass: ArticleContentTextCell.self)
         tableView.registerCellNib(cellClass: ArticleContentImageCell.self)
         tableView.registerCellNib(cellClass: ArticleLeadCell.self)
+        
+        // Home
+        tableView.registerCellNib(cellClass: ArticlePreviewCell.self)
         
     }
 
@@ -48,6 +52,12 @@ final class TableViewCellBuilder {
     
     static func articleLead(_ tableView: UITableView, _ indexPath: IndexPath, article: Article) -> ArticleLeadCell {
         let cell = tableView.dequeueReusableCell(indexPath: indexPath, cellType: ArticleLeadCell.self)
+        cell.configure(article)
+        return cell
+    }
+    
+    static func articlePreview(_ tableView: UITableView, _ indexPath: IndexPath, article: Article) -> ArticlePreviewCell {
+        let cell = tableView.dequeueReusableCell(indexPath: indexPath, cellType: ArticlePreviewCell.self)
         cell.configure(article)
         return cell
     }

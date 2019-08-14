@@ -10,7 +10,6 @@ import UIKit
 
 class MediaCell: UITableViewCell {
     @IBOutlet weak var pictureImageView: UIImageView!
-    @IBOutlet weak var creditsLabel: UILabel!
     @IBOutlet weak var captionLabel: UILabel!
     
     
@@ -26,10 +25,11 @@ class MediaCell: UITableViewCell {
     }
 
     
-    func configure(_ article: Article) {
-        if let media = article.visual.first?.urlPattern, let url = URL(string: media) {
+    func configure(_ article: ArticleDetails,_ pictureUrl: String) {
+        if let url = URL(string: pictureUrl), !pictureUrl.isEmpty {
             pictureImageView.setRemoteImage(url)
         }
+        captionLabel.text = "\(article.visual.first?.caption ?? "") (\(article.visual.first?.credits ?? ""))"
     }
     
     

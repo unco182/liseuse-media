@@ -17,12 +17,8 @@ class ArticleInfoCell: UITableViewCell {
         super.awakeFromNib()
         // Initialization code
     }
-    
-    func setup() {
-        
-    }
-    
-    func configure(_ article: Article) {
+
+    func configure(_ article: Article, author: String) {
         let df = DateFormatter()
         df.dateFormat = "yyyy-MM-dd HH:mm:ss.SSS"
         guard let modificationDate = df.date(from: article.modificationDate), let publicationDate = df.date(from: article.publicationDate) else { return }
@@ -35,13 +31,10 @@ class ArticleInfoCell: UITableViewCell {
 
         let modificationHour = df.string(from: modificationDate)
         let publicationHour = df.string(from: publicationDate)
-        
-        
-        
-        
+
         titleLabel.text = article.title
         dateInfoLabel.text = "dernière modification le \(modificationDay) à \(modificationHour)\npublié le \(publicationDay) à \(publicationHour)"
-//        authorsLabel.text = "article par \(article.authors)"
+        authorsLabel.text = "article par \(author)"
     }
     
 }

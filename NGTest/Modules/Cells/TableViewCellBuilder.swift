@@ -22,9 +22,9 @@ final class TableViewCellBuilder {
     }
 
     
-    static func articleMedia(_ tableView: UITableView, _ indexPath: IndexPath, article: Article) -> MediaCell {
+    static func articleMedia(_ tableView: UITableView, _ indexPath: IndexPath, article: ArticleDetails, pictureUrl: String) -> MediaCell {
         let cell = tableView.dequeueReusableCell(indexPath: indexPath, cellType: MediaCell.self)
-        cell.configure(article)
+        cell.configure(article, pictureUrl)
         return cell
     }
     
@@ -40,9 +40,9 @@ final class TableViewCellBuilder {
         return cell
     }
     
-    static func articleInfo(_ tableView: UITableView, _ indexPath: IndexPath, article: Article) -> ArticleInfoCell {
+    static func articleInfo(_ tableView: UITableView, _ indexPath: IndexPath, article: Article, author: String) -> ArticleInfoCell {
         let cell = tableView.dequeueReusableCell(indexPath: indexPath, cellType: ArticleInfoCell.self)
-        cell.configure(article)
+        cell.configure(article, author: author)
         return cell
     }
     

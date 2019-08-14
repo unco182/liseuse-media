@@ -11,9 +11,12 @@ import Foundation
 struct Visual: Codable {
 
     let urlPattern: String?
+    let caption: String?
+    let credits: String?
 
     private enum CodingKeys: String, CodingKey {
         case urlPattern
-
+        case caption
+        case credits
     }
 }

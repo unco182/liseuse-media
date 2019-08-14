@@ -10,8 +10,8 @@ import Foundation
 import RxSwift
 
 enum DetailsUICell {
-    case media(article: Article)
-    case info(article: Article)
+    case media(article: ArticleDetails, pictureUrl: String)
+    case info(article: Article, author: String)
     case lead(article: Article)
     case contentText(chapter: MobileChapter)
     case contentImage(chapter: MobileChapter)
@@ -48,17 +48,20 @@ class DetailsViewModel {
     
     func buildDatasource() {
         self.detailsView.isLoading(true)
-        datasource = [.media(article: article),
-                      .info(article: article),
-                      .lead(article: article)]
-        for current in articleDetails?.mobileChapters ?? [] {
-            switch current.contentType {
-            case "image":
-                datasource.append(.contentImage(chapter: current))
-            case "paragraph":
-                datasource.append(.contentText(chapter: current))
-            default:
-                continue
+        if let aDetails = articleDetails {
+            datasource = [.media(article: aDetails, pictureUrl: article.visual.first?.urlPattern ?? ""),
+                          .info(article: article, author: aDetails.byLine ?? ""),
+                          .lead(article: article)]
+            for current in articleDetails?.mobileChapters ?? [] {
+                switch current.contentType {
+                case "image":
+                    continue
+                //                datasource.append(.contentImage(chapter: current)) // Il me manquait les sizeName afin de pouvoir recupérer les photos illustratives des articles
+                case "paragraph":
+                    datasource.append(.contentText(chapter: current))
+                default:
+                    continue
+                }
             }
         }
 

@@ -40,16 +40,16 @@ extension DetailsViewController {
         let item = viewModel.datasource[indexPath.row]
         
         switch item {
-        case .media(let article):
-            return TableViewCellBuilder.articleMedia(tableView, indexPath, article: article)
+        case .media(let article, let pictureUrl):
+            return TableViewCellBuilder.articleMedia(tableView, indexPath, article: article, pictureUrl: pictureUrl)
         case .contentText(let mobileChapter):
             return TableViewCellBuilder.articleContentText(tableView, indexPath, mobileChapter: mobileChapter)
         case .contentImage(let mobileChapter):
             return TableViewCellBuilder.articleContentImage(tableView, indexPath, mobileChapter: mobileChapter)
         case .lead(let article):
             return TableViewCellBuilder.articleLead(tableView, indexPath, article: article)
-        case .info(let article):
-            return TableViewCellBuilder.articleInfo(tableView, indexPath, article: article)
+        case .info(let article, let author):
+            return TableViewCellBuilder.articleInfo(tableView, indexPath, article: article, author: author)
         }   
     }
     

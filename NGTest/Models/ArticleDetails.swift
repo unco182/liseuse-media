@@ -25,7 +25,7 @@ struct ArticleDetails: Codable {
     let credits: String?
     let urlPattern: String? // pictureUrl
     let mobileChapters: [MobileChapter] //mobileChapters.index.text
-//    let authors: String?
+    let byLine: String?
     
     
     // - MARK computed values
@@ -53,6 +53,6 @@ struct ArticleDetails: Codable {
         case credits
         case urlPattern
         case mobileChapters
-//        case authors
+        case byLine
     }
 }

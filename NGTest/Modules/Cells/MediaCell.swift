@@ -26,10 +26,10 @@ class MediaCell: UITableViewCell {
     }
 
     
-    func configure(_ article: ArticleDetails) {
-//        setup()
-//        pictureImageView
-
+    func configure(_ article: Article) {
+        if let media = article.visual.first?.urlPattern, let url = URL(string: media) {
+            pictureImageView.setRemoteImage(url)
+        }
     }
     
     

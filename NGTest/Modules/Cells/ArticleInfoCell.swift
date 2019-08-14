@@ -22,10 +22,26 @@ class ArticleInfoCell: UITableViewCell {
         
     }
     
-    func configure(_ article: ArticleDetails) {
+    func configure(_ article: Article) {
+        let df = DateFormatter()
+        df.dateFormat = "yyyy-MM-dd HH:mm:ss.SSS"
+        guard let modificationDate = df.date(from: article.modificationDate), let publicationDate = df.date(from: article.publicationDate) else { return }
+        df.dateFormat = "dd/MM/yyyy"
+        
+        let modificationDay = df.string(from: modificationDate)
+        let publicationDay = df.string(from: publicationDate)
+        
+        df.dateFormat = "HH:mm"
+
+        let modificationHour = df.string(from: modificationDate)
+        let publicationHour = df.string(from: publicationDate)
+        
+        
+        
+        
         titleLabel.text = article.title
-        dateInfoLabel.text = "dernière modification le \(article.modificationDate), publié le \(article.publicationDate)"
-        authorsLabel.text = "article par \(article.authors)"
+        dateInfoLabel.text = "dernière modification le \(modificationDay) à \(modificationHour)\npublié le \(publicationDay) à \(publicationHour)"
+//        authorsLabel.text = "article par \(article.authors)"
     }
     
 }

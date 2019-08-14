@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ArticleContentCell: UITableViewCell {
+class ArticleContentTextCell: UITableViewCell {
     @IBOutlet weak var contentLabel: UILabel!
     
     override func awakeFromNib() {
@@ -16,8 +16,8 @@ class ArticleContentCell: UITableViewCell {
         // Initialization code
     }
 
-    func configure(_ article: ArticleDetails) {
-        contentLabel.text = article.mobileChapters.joined(separator: "\n\n")
+    func configure(_ chapter: MobileChapter) {
+        contentLabel.text = chapter.text ?? ""
     }
-    
+
 }

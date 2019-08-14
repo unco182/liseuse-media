@@ -27,16 +27,20 @@ class HomeViewController: UITableViewController {
     // qui devrait être dépourvu de logique. Dans le cadre d'un projet de grande envergure on aurait pu implémenter un Navigator ou un Coordinator.
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        super.prepare(for: segue, sender: sender)
         let destination = segue.destination as! DetailsViewController
-        destination.viewModel = DetailsViewModel(id: ""/*viewModel.selectedId*/, view: destination)
-        navigationController?.pushViewController(destination, animated: true)
+        destination.viewModel = DetailsViewModel(id: viewModel?.selectedArticle?.id ?? "", view: destination)
+//        navigationController?.pushViewController(destination, animated: true)
         
     }
 
-    
 }
 
 extension HomeViewController: HomeProtocol {
+    func showArticleDetails() {
+        performSegue(withIdentifier: "toDetails", sender: self)
+    }
+    
     func isLoading(_ bool: Bool) {
         self.isLoading = bool
     }
@@ -65,7 +69,7 @@ extension HomeViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        viewModel.setSelectedArticle(indexPath.row)
+        viewModel?.setSelectedArticle(indexPath.row)
     }
 }
 

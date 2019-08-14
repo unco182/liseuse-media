@@ -11,6 +11,7 @@ import Foundation
 enum DetailsUICell {
     case media(article: ArticleDetails)
     case info(article: ArticleDetails)
+    case lead(article: ArticleDetails)
     case content(article: ArticleDetails)
 }
 
@@ -41,6 +42,7 @@ class DetailsViewModel {
         let article = fetchArticle()
         datasource = [.media(article: article),
                       .info(article: article),
+                      .lead(article: article),
                       .content(article: article)]
         self.detailsView.isLoading(false)
         

@@ -11,12 +11,52 @@ import UIKit
 class DetailsViewController: UITableViewController {
     var viewModel: DetailsViewModel!
     
-    
+    var isLoading = false {
+        didSet {
+            updateUI()
+        }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        TableViewCellBuilder.prepareTableView(tableView)
         // Do any additional setup after loading the view.
+        
+    }
+    
+    func registerCell() {
+        
+    }
+    
+    func updateUI() {
+        self.tableView.reloadData()
+    }
+}
+
+extension DetailsViewController {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let item = viewModel.datasource[indexPath.row]
+        
+        switch item {
+        case .media(let article):
+            return TableViewCellBuilder.articleMedia(tableView, indexPath, article: article)
+        case .content(let article):
+            return TableViewCellBuilder.articleContent(tableView, indexPath, article: article)
+        case .lead(let article):
+            return UITableViewCell()
+        case .info(let article):
+            return TableViewCellBuilder.articleInfo(tableView, indexPath, article: article)
+        }   
+    }
+    
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if isLoading {
+            tableView.setLoader()
+        }
+        else {
+            tableView.restore()
+        }
+        return self.viewModel?.datasource.count ?? 0
     }
 }
 

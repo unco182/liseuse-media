@@ -9,7 +9,29 @@
 import Foundation
 import UIKit
 
-extension UITableView {
+public extension UITableView {
+    
+    func registerCellClass(cellClass: AnyClass) {
+        let identifier = String(describing: cellClass)
+        self.register(cellClass, forCellReuseIdentifier: identifier)
+    }
+    
+    func registerCellNib(cellClass: AnyClass) {
+        let identifier = String(describing: cellClass)
+        let nib = UINib(nibName: identifier, bundle: nil)
+        self.register(nib, forCellReuseIdentifier: identifier)
+    }
+    
+    final func dequeueReusableCell<T: UITableViewCell>(indexPath: IndexPath, cellType: T.Type = T.self) -> T {
+        guard let cell = self.dequeueReusableCell(withIdentifier: cellType.className(), for: indexPath) as? T else {
+            fatalError(
+                "Failed to dequeue a cell with identifier \(cellType.className()) matching type \(cellType.self). "
+                    + "Check that the reuseIdentifier is set properly in your XIB/Storyboard "
+                    + "and that you registered the cell beforehand"
+            )
+        }
+        return cell
+    }
     
     func setEmptyMessage(_ message: String) {
         let messageLabel = UILabel(frame: CGRect(x: 0, y: 0, width: self.bounds.size.width, height: self.bounds.size.height))
@@ -36,6 +58,12 @@ extension UITableView {
     
     func restore() {
         self.backgroundView = nil
-        self.separatorStyle = .singleLine
+        self.separatorStyle = .none
+    }
+}
+
+extension NSObject {
+    static func className() -> String {
+        return String(describing: self)
     }
 }

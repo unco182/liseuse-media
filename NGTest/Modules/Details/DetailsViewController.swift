@@ -20,6 +20,8 @@ class DetailsViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         TableViewCellBuilder.prepareTableView(tableView)
+        tableView.allowsSelection = false
+        tableView.separatorStyle = .none
         // Do any additional setup after loading the view.
         
     }
@@ -40,10 +42,12 @@ extension DetailsViewController {
         switch item {
         case .media(let article):
             return TableViewCellBuilder.articleMedia(tableView, indexPath, article: article)
-        case .content(let article):
-            return TableViewCellBuilder.articleContent(tableView, indexPath, article: article)
+        case .contentText(let mobileChapter):
+            return TableViewCellBuilder.articleContentText(tableView, indexPath, mobileChapter: mobileChapter)
+        case .contentImage(let mobileChapter):
+            return TableViewCellBuilder.articleContentImage(tableView, indexPath, mobileChapter: mobileChapter)
         case .lead(let article):
-            return UITableViewCell()
+            return TableViewCellBuilder.articleLead(tableView, indexPath, article: article)
         case .info(let article):
             return TableViewCellBuilder.articleInfo(tableView, indexPath, article: article)
         }   
@@ -62,6 +66,6 @@ extension DetailsViewController {
 
 extension DetailsViewController: DetailsProtocol {
     func isLoading(_ bool: Bool) {
-        
+        self.isLoading = bool
     }
 }

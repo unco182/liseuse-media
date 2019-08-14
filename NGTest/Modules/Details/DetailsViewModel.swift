@@ -7,12 +7,14 @@
 //
 
 import Foundation
+import RxSwift
 
 enum DetailsUICell {
-    case media(article: ArticleDetails)
-    case info(article: ArticleDetails)
-    case lead(article: ArticleDetails)
-    case content(article: ArticleDetails)
+    case media(article: Article)
+    case info(article: Article)
+    case lead(article: Article)
+    case contentText(chapter: MobileChapter)
+    case contentImage(chapter: MobileChapter)
 }
 
 protocol DetailsProtocol {
@@ -20,30 +22,46 @@ protocol DetailsProtocol {
 }
 
 class DetailsViewModel {
-    var id: String
-    var article: ArticleDetails?
+    var article: Article
+    var articleDetails: ArticleDetails?
     var detailsView: DetailsProtocol
     
     var datasource: [DetailsUICell] = []
     
-    init(id: String, view: DetailsProtocol) {
-        self.id = id
+    var disposeBag = DisposeBag()
+    
+    init(article: Article, view: DetailsProtocol) {
+        self.article = article
         self.detailsView = view
-        self.article = fetchArticle()
+        fetchArticleDetails()
     }
     
-    func fetchArticle() -> ArticleDetails {
-
-        return ArticleDetails(id: "", channelName: "", title: "", lead: "", visual: "", publicationDate: "", modificationDate: "", dataUrl: "", location: "", lienURL: "", showDate: true, relatedArticles: [], caption: "", credits: "", urlPattern: "", mobileChapters: [], authors: "")
+    func fetchArticleDetails() {
+        S.sp.articleManager.fetchArticlesDetails(url: self.article.dataUrl).subscribe(onSuccess: { [unowned self] articleDetails in
+            self.articleDetails = articleDetails
+            self.buildDatasource()
+        }) { (e) in
+            //Generic error handling behavior to implement
+            print(e.localizedDescription)
+        }.disposed(by: disposeBag)
     }
     
     func buildDatasource() {
         self.detailsView.isLoading(true)
-        let article = fetchArticle()
         datasource = [.media(article: article),
                       .info(article: article),
-                      .lead(article: article),
-                      .content(article: article)]
+                      .lead(article: article)]
+        for current in articleDetails?.mobileChapters ?? [] {
+            switch current.contentType {
+            case "image":
+                datasource.append(.contentImage(chapter: current))
+            case "paragraph":
+                datasource.append(.contentText(chapter: current))
+            default:
+                continue
+            }
+        }
+
         self.detailsView.isLoading(false)
         
     }

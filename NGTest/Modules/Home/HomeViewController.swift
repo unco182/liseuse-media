@@ -29,9 +29,9 @@ class HomeViewController: UITableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         super.prepare(for: segue, sender: sender)
         let destination = segue.destination as! DetailsViewController
-        destination.viewModel = DetailsViewModel(id: viewModel?.selectedArticle?.id ?? "", view: destination)
-//        navigationController?.pushViewController(destination, animated: true)
-        
+        if let selected = viewModel?.selectedArticle {
+            destination.viewModel = DetailsViewModel(article: selected , view: destination)
+        }
     }
 
 }

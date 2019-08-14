@@ -33,8 +33,10 @@ class ArticleInfoCell: UITableViewCell {
         let publicationHour = df.string(from: publicationDate)
 
         titleLabel.text = article.title
-        dateInfoLabel.text = "dernière modification le \(modificationDay) à \(modificationHour)\npublié le \(publicationDay) à \(publicationHour)"
-        authorsLabel.text = "article par \(author)"
+        dateInfoLabel.text = "Dernière modification le \(modificationDay) à \(modificationHour)\nPublié le \(publicationDay) à \(publicationHour)"
+
+        authorsLabel.isHidden = author.isEmpty
+        authorsLabel.text = "Article par \(author)"
     }
     
 }

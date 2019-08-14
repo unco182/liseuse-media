@@ -60,6 +60,7 @@
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
                 <outlet property="captionLabel" destination="ZOh-b6-jiJ" id="F66-df-Emp"/>
+                <outlet property="captionView" destination="cf8-r8-Xva" id="LuN-Z1-NgJ"/>
                 <outlet property="pictureImageView" destination="BMR-EF-1ca" id="Knk-D8-Ycw"/>
             </connections>
             <point key="canvasLocation" x="75" y="39"/>

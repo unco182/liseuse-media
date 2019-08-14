@@ -9,8 +9,9 @@
 import UIKit
 
 class MediaCell: UITableViewCell {
-    @IBOutlet weak var pictureImageView: UIImageView!
-    @IBOutlet weak var captionLabel: UILabel!
+    @IBOutlet private weak var captionView: UIView!
+    @IBOutlet private weak var pictureImageView: UIImageView!
+    @IBOutlet private weak var captionLabel: UILabel!
     
     
     override func awakeFromNib() {
@@ -24,13 +25,16 @@ class MediaCell: UITableViewCell {
         self.layer.cornerRadius = 8
     }
 
-    
     func configure(_ article: ArticleDetails,_ pictureUrl: String) {
         if let url = URL(string: pictureUrl), !pictureUrl.isEmpty {
             pictureImageView.setRemoteImage(url)
         }
-        captionLabel.text = "\(article.visual.first?.caption ?? "") (\(article.visual.first?.credits ?? ""))"
+        if let caption = article.visual.first?.caption, let credits = article.visual.first?.credits {
+            captionView.isHidden = false
+            captionLabel.text = "\(caption) (\(credits))"
+        }
+        else {
+            captionView.isHidden = true
+        }
     }
-    
-    
 }

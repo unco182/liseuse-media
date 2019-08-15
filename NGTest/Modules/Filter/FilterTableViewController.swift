@@ -49,13 +49,13 @@ class FilterTableViewController: UITableViewController {
         
         switch item {
         case .resetFilter:
-            return TableViewCellBuilder.resetFilter(
-        case .channelItem(_, let isSelected):
-            <#code#>
-        case .olderArticle(_):
-            <#code#>
-        case .newerArticle(_):
-            <#code#>
+            return TableViewCellBuilder.filterResetCell(tableView, indexPath)
+        case .channelItem(let name, let isSelected):
+            return TableViewCellBuilder.filterChannelCell(tableView, indexPath, isSelected: isSelected, name: name)
+        case .olderArticle(let isSelected):
+            return TableViewCellBuilder.filterDateCell(tableView, indexPath, isSelected: isSelected, name: "Les plus anciens")
+        case .newerArticle(let isSelected):
+            return TableViewCellBuilder.filterDateCell(tableView, indexPath, isSelected: isSelected, name: "Les plus récents")
         }
     }
 }

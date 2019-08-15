@@ -71,7 +71,7 @@ final class TableViewCellBuilder {
     
     // MARK: - Filter Cells
     
-    static func filterResetCell(_ tableView: UITableView, _ indexPath: IndexPath, isSelected: Bool) -> FilterResetCell {
+    static func filterResetCell(_ tableView: UITableView, _ indexPath: IndexPath) -> FilterResetCell {
         let cell = tableView.dequeueReusableCell(indexPath: indexPath, cellType: FilterResetCell.self)
         return cell
     }

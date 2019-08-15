@@ -52,7 +52,10 @@ class FilterViewModel {
         var isNewerActive = false
         
         if let filter = selectedFilter {
-            datasource.append(.resetFilter)
+            if !(filter == .resetFilter) {
+               datasource.append(.resetFilter)
+            }
+            
             
             isOlderActive = (filter == .olderArticle(true))
             isNewerActive = (filter == .newerArticle(true))
@@ -64,9 +67,9 @@ class FilterViewModel {
                 switch activeFilter {
                     
                 case .resetFilter, .olderArticle(_), .newerArticle(_) :
-                    break
-                case .channelItem(let channel, let isSelected):
-                    datasource.append(.channelItem(current, isSelected:  activeFilter == .channelItem(channel, isSelected: isSelected)))
+                    datasource.append(.channelItem(current, isSelected: false))
+                case .channelItem(_, let isSelected):
+                    datasource.append(.channelItem(current, isSelected:  activeFilter == .channelItem(current, isSelected: isSelected)))
                 }
             }
             else {

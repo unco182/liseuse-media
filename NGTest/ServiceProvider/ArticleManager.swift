@@ -46,7 +46,7 @@ class ArticleManager: NSObject {
     func fetchChannelNames() -> [String] {
         return fetchArticles().map { (article) -> String in
             return article.channelName
-        }
+        }.unique
     }
     
     func fetchFilteredArticles(_ filter: FilterUICell) -> [Article] {

@@ -63,14 +63,14 @@ class ArticleManager: NSObject {
                 let df = DateFormatter()
                 df.dateFormat = "yyyy-MM-dd HH:mm:ss.SSS"
                 guard let article1ModificationDate = df.date(from: article1.modificationDate), let article2ModificationDate = df.date(from: article2.modificationDate) else { return false }
-                return article1ModificationDate > article2ModificationDate
+                return article1ModificationDate < article2ModificationDate
             })
         case .newerArticle(_):
             return fetchArticles().sorted(by: { (article1, article2) -> Bool in
                 let df = DateFormatter()
                 df.dateFormat = "yyyy-MM-dd HH:mm:ss.SSS"
                 guard let article1ModificationDate = df.date(from: article1.modificationDate), let article2ModificationDate = df.date(from: article2.modificationDate) else { return false }
-                return article1ModificationDate < article2ModificationDate
+                return article1ModificationDate > article2ModificationDate
             })
 
         }

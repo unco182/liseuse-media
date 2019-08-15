@@ -19,15 +19,15 @@ class DetailsViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        // Do any additional setup after loading the view.
+        setupTableView()
+    }
+    
+    func setupTableView() {
         TableViewCellBuilder.prepareTableView(tableView)
         tableView.allowsSelection = false
         tableView.separatorStyle = .none
-        // Do any additional setup after loading the view.
-        
-    }
-    
-    func registerCell() {
-        
     }
     
     func updateUI() {

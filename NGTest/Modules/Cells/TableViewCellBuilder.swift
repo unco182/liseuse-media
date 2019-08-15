@@ -23,8 +23,13 @@ final class TableViewCellBuilder {
         // Home
         tableView.registerCellNib(cellClass: ArticlePreviewCell.self)
         
+        // Filter
+        tableView.registerCellNib(cellClass: FilterResetCell.self)
+        tableView.registerCellNib(cellClass: FilterDateCell.self)
+        tableView.registerCellNib(cellClass: FilterChannelCell.self)
     }
-
+    
+    // MARK: - Details Cells
     
     static func articleMedia(_ tableView: UITableView, _ indexPath: IndexPath, article: ArticleDetails, pictureUrl: String) -> MediaCell {
         let cell = tableView.dequeueReusableCell(indexPath: indexPath, cellType: MediaCell.self)
@@ -56,9 +61,30 @@ final class TableViewCellBuilder {
         return cell
     }
     
+    // MARK: - Home Cells
+    
     static func articlePreview(_ tableView: UITableView, _ indexPath: IndexPath, article: Article) -> ArticlePreviewCell {
         let cell = tableView.dequeueReusableCell(indexPath: indexPath, cellType: ArticlePreviewCell.self)
         cell.configure(article)
+        return cell
+    }
+    
+    // MARK: - Filter Cells
+    
+    static func filterResetCell(_ tableView: UITableView, _ indexPath: IndexPath, isSelected: Bool) -> FilterResetCell {
+        let cell = tableView.dequeueReusableCell(indexPath: indexPath, cellType: FilterResetCell.self)
+        return cell
+    }
+    
+    static func filterDateCell(_ tableView: UITableView, _ indexPath: IndexPath, isSelected: Bool, name: String) -> FilterDateCell {
+        let cell = tableView.dequeueReusableCell(indexPath: indexPath, cellType: FilterDateCell.self)
+        cell.configure(isSelected: isSelected, name: name)
+        return cell
+    }
+    
+    static func filterChannelCell(_ tableView: UITableView, _ indexPath: IndexPath, isSelected: Bool, name: String) -> FilterChannelCell {
+        let cell = tableView.dequeueReusableCell(indexPath: indexPath, cellType: FilterChannelCell.self)
+        cell.configure(isSelected: isSelected, name: name)
         return cell
     }
     

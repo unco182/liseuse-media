@@ -1,0 +1,72 @@
+COMPTE RENDU - Nuglife - Test Technique - Alban PELLEGRINI
+
+Sujet : 
+
+## Test technique - candidat Développeur iOS
+
+L'application doit consister en 2 écrans:
+- Un écran principal présentant un feed provenant d'un fichier JSON (déjà parsé dans le projet)
+- Un écran de détail d'article
+
+### Suivre les instructions suivantes :
+* 1 : Utilisez le repo git;
+* 2 : Implémenter le bouton du "Tri" pour que l'usager puisse trier par date ou par « channelName »;
+* 3 : Ajouter la fonctionnalité pour filtrer par « ChannelName »;
+* 4 : Supporter les appareils iOS 10 à 12.2
+* 5 : Afficher la liste des manchettes de la manière que vous préférez (CollectionView, TableView, MVVM, MVC, MVP, Viper, ...);
+* 6 : Afficher le contenu d'un article dans un deuxième écran;
+
+Sur une base volontaire:
+
+- Implémenter des tests automatisés;
+- Utiliser la stack technologique de ton choix;
+- Utiliser l'architecture de ton choix;
+- Expliquer les hypothèses/choix pris si certains points ne sont pas faits. Un projet incomplet et propre sera toujours privilégié par rapport à un test complet mais avec des points non-fonctionnels.
+
+#######################################
+
+Pour implémenter ce test, j'ai décidé d'utiliser un MVVM. 
+Mon objectif a été de mettre le moins de logique dans la vue (ViewControllers), pour donner la responsabilité aux différents ViewModel. 
+
+Concernant l'UI, je n'ai pas cherché à faire quelque chose de fancy, j'ai privilégié quelques chose de sobre mais fonctionnel. 
+
+Ecran 1 - HomeViewController : 
+
+C'est un TableViewController avec les cellules représentant les articles, j'ai mappé la photo principale de l'article, le titre, le lead et le channel name qui me semblaient être les informations les plus pertinents à faire apparaitre.
+En haut à droite le bouton "Trier" fourni avec le test, un tap dessus permet d'ouvrir l'Ecran 2
+Les cellules représentant les articles sont tappables également et permettent d'ouvrir l'Ecran 3
+
+Le ViewModel de la Home contient la liste des articles qui servent de datasource à la TableView, des optionnels servant à gérer les filtres et les articles sélectionnés.
+Il répond au HomeProtocol qui permet au viewModel d'effectuer les changements UI nécessaires pour répondre à l'interaction utilisateur.
+A son initialisation, il va chercher les articles disponibles via l'ArticleManager
+
+Ecran 2 - FilterViewController : 
+
+C'est un TableViewController avec les cellules représentant les différents filtre applicable. Pour plus de simplicité j'ai donné la possibilité à l'utilisateur d'utiliser un seul filtre à la fois. 
+La liste des filtres disponibles sont les différents Channel, la date triée du plus récent ou du plus ancien, la possibilité d'annuler les filtres.
+Un delegate entre le HomeViewController et le FilterViewController permet de rafraichir la vue Home une fois un filtre sélectionné.
+
+Le viewModel détient également toute la logique concernant le filtrage des articles
+
+Ecran 3 - DetailsViewController : 
+
+C'est un TableViewController, il affiche l'objet ArticleDetails, qui est récupéré via un appel réseau au lien fourni dans l'objet Article du HomeViewController.
+J'ai utilisé Alamofire, via un ArticleManager afin de récupérer le Json fourni par le service et mapper les informations qui m'ont semblé pertinentes.
+J'utilise RxSwift pour gérer le coté asynchrone de la requête et mapper mes objets modèles.
+Le body de l'article est traité afin de pouvoir afficher correctement les balises HTML (type <b>) ainsi que les différents paragraphes. Ne connaissant pas les "sizename" disponibles, j'ai n'ai pas pu implémenter l'affichage des photos d'illustration d'article. Cependant le code est presque prêt pour cette fonctionnalité.
+
+Navigation :
+Dans le cadre du test, j'ai utilisé un unique storyboard, ne devant pas travailler en équipe sur le test. 
+Cependant en équipe, il convient de mieux séparer les différentes vues afin de pouvoir collaborer en équipe plus facilement.
+La navigation se fait avec des Segue, j'aurais pu implémenter un Navigator ou un Coordinator mais pour les besoins du test je n'en ai pas vu la plus value.  
+
+Test automatisés : 
+Etant sur la base du volontariat et n'ayant pas eu l'occasion de pratiquer lors de mes dernières expériences professionnelles, je n'ai pas voulu montrer du code "non maitrisé". Cependant lors de mon entretien avec Alexandre Lision, j'ai cru comprendre que vous en faisiez, et ce point me motive à rejoindre vos équipe afin de poursuivre ma montée en compétence sur iOS pour me diriger vers l'expertise. 
+
+Gestion d'erreur :
+Dans le cadre du test, je n'ai pas implémenter de gestion d'erreur (comme une coupure réseau par exemple) afin de simplifier et d'aller à l'essentiel. Cependant, pour l'expérience utilisateur, la gestion d'erreur devrait être mise en place.
+
+
+Je reste à votre disposition pour échanger avec vous sur ce test si besoin. 
+
+Alban Pellegrini

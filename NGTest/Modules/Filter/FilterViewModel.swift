@@ -15,17 +15,17 @@ enum FilterUICell {
     case newerArticle(_ isSelected: Bool)
 }
 
-protocol HomeFilterDelegate {
+protocol HomeFilterDelegate: NSObject {
     func filterSelected(_ filter: FilterUICell)
 }
 
-protocol FilterProtocol {
+protocol FilterProtocol: NSObject {
     func isLoading(_ bool: Bool)
 }
 
 class FilterViewModel {
 
-    var filterView: FilterProtocol
+    weak var filterView: FilterProtocol?
     
     var datasource: [FilterUICell] = []
     
@@ -44,9 +44,15 @@ class FilterViewModel {
     }
     
     func buildDatasource() {
-        self.filterView.isLoading(true)
-        if let _ = selectedFilter {
+        self.filterView?.isLoading(true)
+        var isOlderActive = false
+        var isNewerActive = false
+        
+        if let filter = selectedFilter {
             datasource.append(.resetFilter)
+            
+            isOlderActive = (filter == .olderArticle(true))
+            isNewerActive = (filter == .newerArticle(true))
         }
 
         for current in channels {
@@ -64,12 +70,11 @@ class FilterViewModel {
               datasource.append(.channelItem(current, isSelected: false))
             }
         }
-        let isOlderActive = (selectedFilter! == .olderArticle(true))
-        let isNewerActive = (selectedFilter! == .newerArticle(true))
+
         datasource.append(.olderArticle(isOlderActive))
         datasource.append(.newerArticle(isNewerActive))
        
-        self.filterView.isLoading(false)
+        self.filterView?.isLoading(false)
         
     }
 }

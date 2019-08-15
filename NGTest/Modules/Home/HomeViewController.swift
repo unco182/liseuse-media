@@ -24,16 +24,27 @@ class HomeViewController: UITableViewController {
         self.tableView.reloadData()
     }
     
+    @IBAction func filterButtonTapped(_ sender: Any) {
+        viewModel?.filterButtonTapped()
+    }
+    
     // MARK - Navigation
     // Pour les besoins du test, j'ai choisi d'utiliser les segue, cependant ce n'est pas forcement la meilleure pratique car cela donne une responsabilité au ViewController
     // qui devrait être dépourvu de logique. Dans le cadre d'un projet de grande envergure on aurait pu implémenter un Navigator ou un Coordinator.
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         super.prepare(for: segue, sender: sender)
-        let destination = segue.destination as! DetailsViewController
-        if let selected = viewModel?.selectedArticle {
-            destination.viewModel = DetailsViewModel(article: selected , view: destination)
+        if segue.identifier == "toDetails" {
+            let destination = segue.destination as! DetailsViewController
+            if let selected = viewModel?.selectedArticle {
+                destination.viewModel = DetailsViewModel(article: selected , view: destination)
+            }
         }
+        else if segue.identifier == "toFilter" {
+            let destination = segue.destination as! FilterTableViewController
+            destination.viewModel = FilterViewModel(delegate: self, view: destination, selectedFilter: viewModel?.selectedFilter)
+        }
+
     }
 
 }
@@ -41,6 +52,10 @@ class HomeViewController: UITableViewController {
 extension HomeViewController: HomeProtocol {
     func showArticleDetails() {
         performSegue(withIdentifier: "toDetails", sender: self)
+    }
+    
+    func showFilterView() {
+        performSegue(withIdentifier: "toFilter", sender: self)
     }
     
     func isLoading(_ bool: Bool) {
@@ -71,6 +86,12 @@ extension HomeViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         viewModel?.setSelectedArticle(indexPath.row)
+    }
+}
+
+extension HomeViewController: HomeFilterDelegate {
+    func filterSelected(_ filter: FilterUICell) {
+        viewModel?.selectedFilter = filter
     }
 }
 

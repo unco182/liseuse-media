@@ -17,7 +17,7 @@ enum DetailsUICell {
     case contentImage(chapter: MobileChapter)
 }
 
-protocol DetailsProtocol {
+protocol DetailsProtocol: NSObject {
     func isLoading(_ bool: Bool)
     func navigationTitle(_ channelName: String)
 }
@@ -25,7 +25,7 @@ protocol DetailsProtocol {
 class DetailsViewModel {
     var article: Article
     var articleDetails: ArticleDetails?
-    var detailsView: DetailsProtocol
+    weak var detailsView: DetailsProtocol?
     
     var datasource: [DetailsUICell] = []
     
@@ -48,9 +48,9 @@ class DetailsViewModel {
     }
     
     func buildDatasource() {
-        self.detailsView.isLoading(true)
+        self.detailsView?.isLoading(true)
         if let aDetails = articleDetails {
-            detailsView.navigationTitle(article.channelName)
+            detailsView?.navigationTitle(article.channelName)
             datasource = [.media(article: aDetails, pictureUrl: article.visual.first?.urlPattern ?? ""),
                           .info(article: article, author: aDetails.byLine ?? ""),
                           .lead(article: article)]
@@ -67,7 +67,7 @@ class DetailsViewModel {
             }
         }
 
-        self.detailsView.isLoading(false)
+        self.detailsView?.isLoading(false)
         
     }
 }

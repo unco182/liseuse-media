@@ -19,7 +19,7 @@ class FilterTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        setupTableView()
     }
     
     func setupTableView() {
@@ -57,5 +57,11 @@ class FilterTableViewController: UITableViewController {
         case .newerArticle(let isSelected):
             return TableViewCellBuilder.filterDateCell(tableView, indexPath, isSelected: isSelected, name: "Les plus récents")
         }
+    }
+}
+
+extension FilterTableViewController: FilterProtocol {
+    func isLoading(_ bool: Bool) {
+        self.isLoading = bool
     }
 }

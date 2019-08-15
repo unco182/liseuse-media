@@ -52,12 +52,13 @@
                         <barButtonItem key="backBarButtonItem" title=" " id="2Eq-NG-xv1"/>
                         <barButtonItem key="rightBarButtonItem" title="Trier" id="N9K-QG-9ph">
                             <connections>
-                                <segue destination="nGB-t4-H8Z" kind="presentation" id="hQT-Ut-FN1"/>
+                                <action selector="filterButtonTapped:" destination="gex-J7-JyN" id="rAF-pk-adu"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
                         <segue destination="IOR-7b-g2V" kind="show" identifier="toDetails" id="3BZ-Hq-2sF"/>
+                        <segue destination="nGB-t4-H8Z" kind="presentation" identifier="toFilter" id="YPY-Te-RUp"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="e9i-FL-ILO" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -83,10 +84,10 @@
             </objects>
             <point key="canvasLocation" x="110" y="3"/>
         </scene>
-        <!--Table View Controller-->
+        <!--Filter Table View Controller-->
         <scene sceneID="c39-O4-khE">
             <objects>
-                <tableViewController id="nGB-t4-H8Z" sceneMemberID="viewController">
+                <tableViewController id="nGB-t4-H8Z" customClass="FilterTableViewController" customModule="NGTest" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="bQ6-uL-oDT">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

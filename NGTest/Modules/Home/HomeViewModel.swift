@@ -9,15 +9,21 @@
 import Foundation
 //import RxSwift
 
-protocol HomeProtocol {
+protocol HomeProtocol: NSObject {
     func isLoading(_ bool: Bool)
     func showArticleDetails()
+    func showFilterView()
 }
 
 class HomeViewModel {
-    var homeView: HomeProtocol?
+    weak var homeView: HomeProtocol?
     
     var selectedArticle: Article?
+    var selectedFilter: FilterUICell? {
+        didSet {
+            fetchFilteredArticle()
+        }
+    }
     
     var articles: [Article] = []
     
@@ -32,8 +38,19 @@ class HomeViewModel {
         self.homeView?.isLoading(false)
     }
     
+    func fetchFilteredArticle() {
+        guard let filter = selectedFilter else { return }
+        self.homeView?.isLoading(true)
+        articles = S.sp.articleManager.fetchFilteredArticles(filter)
+        self.homeView?.isLoading(false)
+    }
+    
     func setSelectedArticle(_ index: Int) {
         selectedArticle = articles[index]
         homeView?.showArticleDetails()
+    }
+    
+    func filterButtonTapped() {
+        homeView?.showFilterView()
     }
 }

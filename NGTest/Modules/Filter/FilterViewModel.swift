@@ -21,11 +21,13 @@ protocol HomeFilterDelegate: NSObject {
 
 protocol FilterProtocol: NSObject {
     func isLoading(_ bool: Bool)
+    func dismiss()
 }
 
 class FilterViewModel {
 
     weak var filterView: FilterProtocol?
+    weak var delegate: HomeFilterDelegate?
     
     var datasource: [FilterUICell] = []
     
@@ -34,6 +36,7 @@ class FilterViewModel {
 
     init(delegate: HomeFilterDelegate, view: FilterProtocol, selectedFilter: FilterUICell?) {
         self.filterView = view
+        self.delegate = delegate
         self.selectedFilter = selectedFilter
         self.fetchChannelNames()
     }
@@ -76,5 +79,10 @@ class FilterViewModel {
        
         self.filterView?.isLoading(false)
         
+    }
+    
+    func filterTapped(_ filter: FilterUICell) {
+        delegate?.filterSelected(filter)
+        filterView?.dismiss()
     }
 }

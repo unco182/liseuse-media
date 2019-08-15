@@ -24,7 +24,6 @@ class FilterTableViewController: UITableViewController {
     
     func setupTableView() {
         TableViewCellBuilder.prepareTableView(tableView)
-        tableView.allowsSelection = false
         tableView.separatorStyle = .none
     }
     
@@ -58,9 +57,19 @@ class FilterTableViewController: UITableViewController {
             return TableViewCellBuilder.filterDateCell(tableView, indexPath, isSelected: isSelected, name: "Les plus récents")
         }
     }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: false)
+        let item = viewModel.datasource[indexPath.row]
+        viewModel.filterTapped(item)
+    }
 }
 
 extension FilterTableViewController: FilterProtocol {
+    func dismiss() {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
     func isLoading(_ bool: Bool) {
         self.isLoading = bool
     }
